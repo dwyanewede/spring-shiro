@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.alibaba.druid.pool.DruidDataSource" id="dataSource">
+        <property name="url" value="jdbc:mysql://localhost:3306/basedb" />
+        <property name="username" value="base" />
+        <property name="password" value="123456" />
+    </bean>
+
+    <bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean class="com.dwyanewede.cn.utils.JdbcManager" id="jdbcManager">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean class="com.dwyanewede.cn.dao.impl.UserDaoImpl" id="userDao">
+        <property name="jdbcManager" ref="jdbcManager"/>
+    </bean>
+</beans>
